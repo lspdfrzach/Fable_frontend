@@ -143,7 +143,7 @@ export const actions: Actions = {
 		if (persist) return { started: true };
 
 		if (!started.shiftId) {
-			return fail(502, { message: 'ERM started that shift but did not send back its id.' });
+			return fail(502, { message: 'Fable started that shift but did not send back its id.' });
 		}
 
 		const message = await forceEndShift(token, guild.id, started.shiftId);

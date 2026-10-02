@@ -31,14 +31,14 @@ export interface StepMeta {
 export const stepMeta: StepMeta[] = [
 	{
 		id: 'welcome',
-		label: 'Welcome to ERM',
+		label: 'Welcome to Fable',
 		blurb: 'Five minutes now and your server is running. You can change all of it later.',
 		optional: false
 	},
 	{
 		id: 'roles',
 		label: 'Who runs your server',
-		blurb: 'ERM needs to know which Discord roles are staff before anything else works.',
+		blurb: 'Fable needs to know which Discord roles are staff before anything else works.',
 		optional: false
 	},
 	{
@@ -50,13 +50,13 @@ export const stepMeta: StepMeta[] = [
 	{
 		id: 'game',
 		label: 'Your ER:LC server',
-		blurb: 'Link your private server so ERM can read players, logs and moderation.',
+		blurb: 'Link your private server so Fable can read players, logs and moderation.',
 		optional: true
 	},
 	{
 		id: 'logging',
 		label: 'Where things get logged',
-		blurb: 'Pick the channels punishments and ERM activity are posted to.',
+		blurb: 'Pick the channels punishments and Fable activity are posted to.',
 		optional: true
 	},
 	{
@@ -113,7 +113,7 @@ export function stepProblem(state: OnboardingState, step: OnboardingStep): strin
 			return 'Pick at least one management role, otherwise nobody can open this dashboard.';
 		}
 		if (!state.roles.staffRoles.length) {
-			return 'Pick at least one staff role so your team can use ERM.';
+			return 'Pick at least one staff role so your team can use Fable.';
 		}
 	}
 

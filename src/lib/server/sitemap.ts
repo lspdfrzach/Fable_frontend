@@ -1,3 +1,4 @@
+import { internalUrl } from '$lib/server/config';
 import { error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { features } from '$lib/features';
@@ -32,7 +33,7 @@ export const publicEntries: SitemapEntry[] = [
 		priority: '0.8'
 	})),
 	{ path: '/status', changefreq: 'daily', priority: '0.7' },
-	{ path: '/guilds', changefreq: 'weekly', priority: '0.6' },
+	{ path: '/docs', changefreq: 'weekly', priority: '0.6' },
 	{ path: '/team', changefreq: 'monthly', priority: '0.5' },
 	{ path: '/login', changefreq: 'monthly', priority: '0.5' },
 	{ path: '/invite', changefreq: 'monthly', priority: '0.5' },
@@ -45,10 +46,10 @@ export async function getOverviewGuilds(): Promise<string[]> {
 	if (cached) return cached;
 
 	const refresh = cache.dedupe(key, async () => {
-		if (!env.VITE_INTERNAL_URL || Date.now() < downUntil) return cache.stale(key) ?? [];
+		if (!internalUrl || Date.now() < downUntil) return cache.stale(key) ?? [];
 
 		try {
-			const response = await fetch(`${env.VITE_INTERNAL_URL}/Overview/PublicGuilds`, {
+			const response = await fetch(`${internalUrl}/Overview/PublicGuilds`, {
 				signal: AbortSignal.timeout(timeout)
 			});
 			if (!response.ok) {

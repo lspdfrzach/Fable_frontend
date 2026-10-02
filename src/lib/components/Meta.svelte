@@ -26,7 +26,7 @@
 	{#if description}<meta name="description" content={description} />{/if}
 
 	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content="ERM Systems" />
+	<meta property="og:site_name" content="Fable" />
 	<meta property="og:url" content={canonical} />
 	<meta property="og:title" content={title} />
 	{#if description}<meta property="og:description" content={description} />{/if}

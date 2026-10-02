@@ -119,7 +119,12 @@
 	const term = $derived(query.trim().toLowerCase());
 	const viewer = $derived({ level: guildData.level, reviewer: guildData.reviewer });
 	const visible = $derived(
-		dashboardPages.filter((entry) => matchesPage(entry, term) && pageEntry(entry, viewer))
+		dashboardPages.filter(
+			(entry) =>
+				(!data.builtinSections || data.builtinSections.includes(entry.slug)) &&
+				matchesPage(entry, term) &&
+				pageEntry(entry, viewer)
+		)
 	);
 
 	const groups = $derived(
@@ -188,7 +193,7 @@
 </script>
 
 <svelte:head
-	><title>{active?.label ?? 'Dashboard'} - {guildData.name || 'ERM Systems'}</title></svelte:head
+	><title>{active?.label ?? 'Dashboard'} - {guildData.name || 'Fable'}</title></svelte:head
 >
 
 <svelte:window
@@ -206,6 +211,12 @@
 />
 
 {#snippet entries()}
+	{#if data.builtinSections}
+		<p class="mx-2 mb-3 rounded-lg border border-line bg-white/5 p-3 text-xs text-muted">
+			Bot configuration is connected here. Use Fable in Discord for moderation, applications, and
+			live staff operations.
+		</p>
+	{/if}
 	{#each groups as entry (entry.group)}
 		<p class="px-3 pt-3 pb-1.5 text-[11px] tracking-wide text-muted uppercase">
 			{entry.group}
@@ -400,7 +411,7 @@
 					{#if access.status === 'denied'}
 						{access.guild?.name || 'That server'} needs a management role before you can change its settings.
 					{:else if access.status === 'missing'}
-						Either you left it, or ERM is no longer in it.
+						Either you left it, or Fable is no longer in it.
 					{:else}
 						Discord did not answer in time. Reload in a moment.
 					{/if}
@@ -419,7 +430,7 @@
 					href={resolve(`/${data.guild.id}/dashboard/setup`)}
 					class="mb-6 flex flex-wrap items-center gap-3 rounded-lg border border-yellow-400/25 bg-yellow-400/10 px-4 py-3 text-sm transition-colors hover:bg-yellow-400/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
 				>
-					<span class="font-medium text-yellow-300">ERM is not set up yet.</span>
+					<span class="font-medium text-yellow-300">Fable is not set up yet.</span>
 					<span class="text-muted">Pick your staff roles so your team can start using it.</span>
 					<span class="ml-auto font-semibold text-yellow-300">Finish setup</span>
 				</a>

@@ -1,3 +1,4 @@
+import { builtinBackend, loginAvailable } from '$lib/server/config';
 import { avatarUrl } from '$lib/server/discord';
 import { getGuilds } from '$lib/server/guilds';
 import { getNotifications } from '$lib/server/notifications';
@@ -29,6 +30,8 @@ export const load: LayoutServerLoad = async ({ depends, fetch, locals, route }) 
 
 	if (!route.id) {
 		return {
+			builtinBackend,
+			dashboardAvailable: loginAvailable,
 			signedIn,
 			user: await user,
 			notifications: await notifications,
@@ -36,5 +39,12 @@ export const load: LayoutServerLoad = async ({ depends, fetch, locals, route }) 
 		};
 	}
 
-	return { signedIn, user, notifications, status };
+	return {
+		builtinBackend,
+		dashboardAvailable: loginAvailable,
+		signedIn,
+		user,
+		notifications,
+		status
+	};
 };

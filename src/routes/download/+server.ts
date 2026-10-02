@@ -1,6 +1,7 @@
 import { redirect } from '@sveltejs/kit';
+import { desktopDownloadUrl } from '$lib/server/config';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = () => {
-	redirect(302, 'https://github.com/1FriendlyDoge/Desktop-Releases/releases/tag/V1.0.3');
+	redirect(302, desktopDownloadUrl || '/connect?service=download');
 };

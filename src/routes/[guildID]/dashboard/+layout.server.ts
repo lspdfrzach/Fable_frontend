@@ -1,4 +1,5 @@
 import { getChannels, getRoles } from '$lib/server/discord';
+import { builtinBackend, builtinSections } from '$lib/server/config';
 import { authorizeGuild, guildAccess } from '$lib/server/dashboard';
 import { getGuilds } from '$lib/server/guilds';
 import { bool, getSettings, group, ids } from '$lib/server/settings';
@@ -14,7 +15,9 @@ export const load: LayoutServerLoad = async (event) => {
 	const staff = raw ? group(raw, 'staff_management') : {};
 
 	return {
+		builtinSections: builtinBackend ? builtinSections : null,
 		setupPending:
+			!builtinBackend &&
 			Boolean(raw) &&
 			!bool(onboarding.completed) &&
 			!(ids(staff.role).length > 0 && ids(staff.management_role).length > 0),

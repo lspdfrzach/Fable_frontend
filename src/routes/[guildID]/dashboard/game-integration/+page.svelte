@@ -304,12 +304,12 @@
 	}}
 />
 
-<PageHeader description="Connect your ER:LC server and decide what ERM does inside it." />
+<PageHeader description="Connect your ER:LC server and decide what Fable does inside it." />
 
 <div class="mt-8 flex flex-col gap-6">
 	<Card
 		title="Server Connection"
-		description="ERM needs your private server key to read players, logs and vehicles."
+		description="Fable needs your private server key to read players, logs and vehicles."
 	>
 		{#if linked}
 			<div class="flex flex-wrap items-center gap-4 px-6 py-5">
@@ -330,7 +330,8 @@
 					{:else}
 						<p class="font-medium">Server linked</p>
 						<p class="mt-1 text-sm text-muted">
-							ERM could not reach it just now, so it may be offline or the key may have been reset.
+							Fable could not reach it just now, so it may be offline or the key may have been
+							reset.
 						</p>
 					{/if}
 				</div>
@@ -521,18 +522,18 @@
 
 			<Row
 				label="Remote commands"
-				description="The channel your ER:LC server logs into. ERM reads it to mirror in-game kicks and bans, and to accept :log."
+				description="The channel your ER:LC server logs into. Fable reads it to mirror in-game kicks and bans, and to accept :log."
 			>
 				<ChannelSelect bind:value={form.value.remote_commands.webhook_channel} />
 			</Row>
 		</div>
 	</Card>
 
-	<Card title="Moderation" description="How ERM behaves when your staff moderate in game.">
+	<Card title="Moderation" description="How Fable behaves when your staff moderate in game.">
 		<div class="divide-y divide-line">
 			<Row
 				label="Elevation required"
-				description="Only the owner and co-owners of your ER:LC server can run :admin and :unadmin through ERM."
+				description="Only the owner and co-owners of your ER:LC server can run :admin and :unadmin through Fable."
 				tight
 			>
 				<Switch bind:checked={form.value.elevation_required} label="Elevation required" />
@@ -579,7 +580,7 @@
 		</div>
 	</Card>
 
-	<Card title="Automation" description="Things ERM does without being asked.">
+	<Card title="Automation" description="Things Fable does without being asked.">
 		<div class="divide-y divide-line">
 			<Row
 				label="Automatic shifts"
@@ -609,7 +610,7 @@
 
 		{#if missingShiftType}
 			<Callout tone="warning">
-				Nothing is named {form.value.automatic_shifts.shift_type} in your shift types any more, so ERM
+				Nothing is named {form.value.automatic_shifts.shift_type} in your shift types any more, so Fable
 				falls back to Default. Pick one that still exists.
 			</Callout>
 		{/if}
@@ -918,8 +919,8 @@
 		</div>
 
 		<Callout tone="warning">
-			ERM checks avatars against its own built-in list of items, so blocked items are saved but not
-			read yet. Allowed items already work.
+			Fable checks avatars against its own built-in list of items, so blocked items are saved but
+			not read yet. Allowed items already work.
 		</Callout>
 	</Card>
 
@@ -1170,7 +1171,7 @@
 		</div>
 
 		<Callout tone="warning">
-			ERM does not read the master switch or the minimum player count yet, so per-team rules apply
+			Fable does not read the master switch or the minimum player count yet, so per-team rules apply
 			on their own for now.
 		</Callout>
 	</Card>
@@ -1544,7 +1545,7 @@
 				</label>
 
 				<p class="mt-3 text-sm text-muted">
-					Nothing is saved yet. ERM looks the server up first so you can confirm it is the right
+					Nothing is saved yet. Fable looks the server up first so you can confirm it is the right
 					one.
 				</p>
 			{/if}

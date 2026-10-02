@@ -3,15 +3,15 @@
 	import Meta from '$lib/components/Meta.svelte';
 
 	const description =
-		'How ERM Systems collects, processes, stores and protects the personal data of the people who use our bot, dashboard and website.';
+		'How Fable collects, processes, stores and protects the personal data of the people who use our bot, dashboard and website.';
 </script>
 
-<Meta title="Privacy Policy - ERM Systems" {description} />
+<Meta title="Privacy Policy - Fable" {description} />
 
 <section class="relative overflow-hidden">
 	<div
 		class="pointer-events-none absolute -top-50 left-1/2 h-150 w-250 -translate-x-1/2 rounded-full opacity-60 blur-[120px]"
-		style="background: radial-gradient(closest-side, rgba(160,20,20,0.30), transparent)"
+		style="background: radial-gradient(closest-side, rgba(237,24,37,0.30), transparent)"
 	></div>
 
 	<div class="relative mx-auto max-w-225 px-6 pt-20 pb-12">

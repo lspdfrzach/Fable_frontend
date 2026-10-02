@@ -90,7 +90,7 @@
 
 <svelte:window onkeydown={(event) => event.key === 'Escape' && (editing = null)} />
 
-<PageHeader description="What ERM does inside your ER:LC server without being asked." />
+<PageHeader description="What Fable does inside your ER:LC server without being asked." />
 
 <div class="mt-8 flex flex-col gap-6">
 	<Card
@@ -158,7 +158,7 @@
 
 			<Row
 				label="Warnings before reporting"
-				description="How many checks a player can fail before ERM reports them in the alert channel. Zero never reports."
+				description="How many checks a player can fail before Fable reports them in the alert channel. Zero never reports."
 			>
 				<Input
 					type="number"
@@ -171,7 +171,7 @@
 
 			<Row
 				label="Alert message"
-				description="Sent in game every check, to every player ERM cannot match to a member."
+				description="Sent in game every check, to every player Fable cannot match to a member."
 				wide
 			>
 				<Input
@@ -184,7 +184,7 @@
 		</div>
 
 		<Callout>
-			ERM checks every ten minutes and needs your server key linked to run at all. Players are
+			Fable checks every ten minutes and needs your server key linked to run at all. Players are
 			matched by searching your members for their ROBLOX username, so a member whose Discord name
 			differs is counted as missing.
 		</Callout>
@@ -262,7 +262,7 @@
 					{draft.index < 0 ? 'Add Statistics Channel' : 'Edit Statistics Channel'}
 				</h2>
 				<p class="mt-1 text-sm text-muted">
-					ERM renames this channel every five minutes to match the format.
+					Fable renames this channel every five minutes to match the format.
 				</p>
 			</div>
 
@@ -292,7 +292,7 @@
 					</p>
 				{/if}
 
-				<Field label="Format" description="The name ERM gives the channel.">
+				<Field label="Format" description="The name Fable gives the channel.">
 					<Input bind:value={draft.entry.format} maxlength={100} placeholder="Players: 12/40" />
 				</Field>
 

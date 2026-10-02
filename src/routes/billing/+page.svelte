@@ -34,7 +34,7 @@
 	}
 </script>
 
-<svelte:head><title>Billing - ERM Systems</title></svelte:head>
+<svelte:head><title>Billing - Fable</title></svelte:head>
 
 <section class="mx-auto max-w-3xl px-6 py-16">
 	<h1 class="text-4xl font-bold tracking-[-0.03em]">Billing</h1>
@@ -52,8 +52,8 @@
 				<div class="min-w-40 flex-1">
 					<h2 class="font-semibold">Whitelabel</h2>
 					<p class="mt-1 text-sm text-muted">
-						Run ERM under your own bot name, avatar and banner. Each whitelabel spot can be assigned
-						to one server, and moved between servers whenever you like.
+						Run Fable under your own bot name, avatar and banner. Each whitelabel spot can be
+						assigned to one server, and moved between servers whenever you like.
 					</p>
 				</div>
 

@@ -32,12 +32,12 @@
 			<div class="divide-y divide-line">
 				<Row
 					label="Webhook Channel"
-					description="The channel your ER:LC server posts its kick and ban webhook to. ERM only reads this one."
+					description="The channel your ER:LC server posts its kick and ban webhook to. Fable only reads this one."
 				>
 					<ChannelSelect bind:value={form.value.webhook_channel} />
 				</Row>
 
-				<Row label="Alerts Channel" description="Where ERM reports what it caught.">
+				<Row label="Alerts Channel" description="Where Fable reports what it caught.">
 					<ChannelSelect bind:value={form.value.channel} />
 				</Row>
 
@@ -50,12 +50,12 @@
 			</div>
 
 			<Callout>
-				ERM watches for a single kick or ban command that hits five or more players at once, which
+				Fable watches for a single kick or ban command that hits five or more players at once, which
 				is usually a compromised staff account rather than normal moderation.
 			</Callout>
 
 			<Callout tone="warning">
-				Both channels are needed. Without the webhook channel there is nothing to read, and ERM
+				Both channels are needed. Without the webhook channel there is nothing to read, and Fable
 				stays quiet.
 			</Callout>
 		</div>

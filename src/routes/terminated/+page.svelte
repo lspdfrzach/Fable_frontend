@@ -10,8 +10,8 @@
 </script>
 
 <Meta
-	title="Account Terminated - ERM Systems"
-	description="This ERM account has been terminated."
+	title="Account Terminated - Fable"
+	description="This Fable account has been terminated."
 	noindex
 />
 
@@ -19,7 +19,7 @@
 	<section class="relative flex flex-1 items-center overflow-hidden">
 		<div
 			class="pointer-events-none absolute -top-50 left-1/2 h-150 w-250 -translate-x-1/2 rounded-full opacity-60 blur-[120px]"
-			style="background: radial-gradient(closest-side, rgba(160,20,20,0.30), transparent)"
+			style="background: radial-gradient(closest-side, rgba(237,24,37,0.30), transparent)"
 		></div>
 
 		<main
@@ -43,15 +43,15 @@
 			</h1>
 
 			<p class="mt-5 text-lg leading-relaxed text-balance text-muted">
-				Your account has been terminated from ERM for violating ERM's Terms of Service. If you think
-				this is incorrect, contact us at
+				Your account has been terminated from Fable for violating Fable's Terms of Service. If you
+				think this is incorrect, contact us at
 				<a
-					href="https://discord.gg/Qm8tEYr7at"
+					href="https://discord.gg/fablebot"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="font-medium text-white underline underline-offset-4 transition-colors hover:text-white/85"
 				>
-					discord.gg/Qm8tEYr7at<span class="sr-only"> (opens in a new tab)</span>
+					discord.gg/fablebot<span class="sr-only"> (opens in a new tab)</span>
 				</a>.
 			</p>
 

@@ -5,7 +5,7 @@ import { base, build, files, prerendered, version } from '$service-worker';
 
 const worker = self as unknown as ServiceWorkerGlobalScope;
 
-const cacheName = `erm-${version}`;
+const cacheName = `fable-${version}`;
 const offlineUrl = `${base}/offline`;
 
 const precache = [...build, ...files, ...prerendered.filter((path) => path === offlineUrl)];

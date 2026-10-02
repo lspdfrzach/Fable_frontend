@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import {
 	cachedIssues,
 	cachedLogs,
@@ -202,10 +202,10 @@ async function listen(guild: Guild, guildId: string) {
 	while (!guild.closed) {
 		try {
 			const key = token(guild);
-			if (!key || !env.VITE_INTERNAL_URL) break;
+			if (!key || !internalUrl) break;
 
 			const response = await fetch(
-				`${env.VITE_INTERNAL_URL}/sse/${guildId}?token=${encodeURIComponent(key)}`,
+				`${internalUrl}/sse/${guildId}?token=${encodeURIComponent(key)}`,
 				{
 					headers: { accept: 'text/event-stream' },
 					signal: guild.controller.signal

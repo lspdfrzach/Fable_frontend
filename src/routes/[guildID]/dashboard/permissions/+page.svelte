@@ -74,7 +74,7 @@
 
 			<Row
 				label="Management Role"
-				description="Change anything ERM does here, including these settings."
+				description="Change anything Fable does here, including these settings."
 			>
 				<Roles
 					bind:selected={form.value.levels.managementRoles}

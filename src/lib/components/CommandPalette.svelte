@@ -38,7 +38,7 @@
 		iconUrl?: string;
 	}
 
-	const recentKey = 'erm:recent-commands';
+	const recentKey = 'fable:recent-commands';
 	const recentLimit = 3;
 
 	const iconFor: Record<string, typeof Home> = {

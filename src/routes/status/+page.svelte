@@ -73,10 +73,7 @@
 	});
 </script>
 
-<Meta
-	title="Shard Status - ERM Systems"
-	description="Live shard health and uptime for the ERM Systems bot."
-/>
+<Meta title="Shard Status - Fable" description="Live shard health and uptime for the Fable bot." />
 
 <section class="mx-auto max-w-350 px-6 py-16">
 	<div class="flex flex-wrap items-center gap-4">
@@ -94,7 +91,15 @@
 		</a>
 	</div>
 
-	<p class="mt-3 text-muted">Live latency for every shard ERM is running.</p>
+	<p class="mt-3 text-muted">Live latency for every shard Fable is running.</p>
+	{#if !data.dashboardAvailable}
+		<p class="mt-6 rounded-xl border border-line bg-surface p-5 text-sm text-muted">
+			Live status is not available yet. Visit <a
+				href="https://discord.gg/fablebot"
+				class="text-white underline underline-offset-2">our Discord</a
+			> for service updates.
+		</p>
+	{/if}
 
 	<div class="mt-10 grid items-start gap-6 lg:grid-cols-[1fr_320px]">
 		{#if loading}

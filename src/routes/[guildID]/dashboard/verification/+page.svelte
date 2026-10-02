@@ -38,7 +38,7 @@
 	const problem = $derived(verificationProblem(form.value));
 	const clashing = $derived(overlappingRoles(form.value));
 	const sendHint = $derived(
-		form.dirty ? 'Save your changes first, ERM posts the saved message.' : sendProblem(form.value)
+		form.dirty ? 'Save your changes first, Fable posts the saved message.' : sendProblem(form.value)
 	);
 
 	function edit(which: 'message' | 'dm_message') {
@@ -61,7 +61,7 @@
 			<Row
 				tight
 				label="Verify on join"
-				description="Members who already linked their Roblox account to ERM are verified the moment they join, without touching a button."
+				description="Members who already linked their Roblox account to Fable are verified the moment they join, without touching a button."
 			>
 				<Switch bind:checked={form.value.auto_verify} label="Verify on join" />
 			</Row>
@@ -103,7 +103,7 @@
 		<div class="divide-y divide-line">
 			<Row
 				label="Nickname format"
-				description="Leave this empty to leave nicknames alone. ERM cannot rename the server owner or anyone above it in the role list."
+				description="Leave this empty to leave nicknames alone. Fable cannot rename the server owner or anyone above it in the role list."
 			>
 				<Input
 					bind:value={form.value.nickname}
@@ -146,7 +146,10 @@
 		</div>
 	</Card>
 
-	<Card title="Messages" description="The prompt members see, and what ERM sends them afterwards.">
+	<Card
+		title="Messages"
+		description="The prompt members see, and what Fable sends them afterwards."
+	>
 		<div class="divide-y divide-line">
 			<Row
 				label="Verify channel"
@@ -227,7 +230,7 @@
 			</Row>
 
 			{#if form.value.dm_enabled}
-				<Row tight label="Direct message" description="What ERM sends them.">
+				<Row tight label="Direct message" description="What Fable sends them.">
 					<button
 						type="button"
 						onclick={() => edit('dm_message')}

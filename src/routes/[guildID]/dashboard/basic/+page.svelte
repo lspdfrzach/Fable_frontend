@@ -124,7 +124,7 @@
 	}}
 />
 
-<PageHeader description="The basic configuration settings for ERM in this server." />
+<PageHeader description="The basic configuration settings for Fable in this server." />
 
 <div class="mt-8 flex flex-col gap-6">
 	<Card title="Roles" description="Permission levels are read top to bottom.">
@@ -145,7 +145,7 @@
 
 			<Row
 				label="Management Role"
-				description="Change anything ERM does here, including these settings."
+				description="Change anything Fable does here, including these settings."
 			>
 				<Roles bind:selected={form.value.managementRoles} placeholder="No management roles" />
 			</Row>
@@ -162,7 +162,7 @@
 
 	<Card
 		title="Prefix"
-		description="What ERM's text commands start with. Slash commands always work."
+		description="What Fable's text commands start with. Slash commands always work."
 	>
 		<Row
 			label="Command Prefix"
@@ -183,7 +183,7 @@
 
 	<Card
 		title="Support PIN"
-		description="Give this to ERM support so they can confirm you manage this server."
+		description="Give this to Fable support so they can confirm you manage this server."
 	>
 		<form
 			method="POST"
@@ -250,7 +250,7 @@
 					</div>
 				{:else}
 					<p class="text-sm text-muted">
-						No support PIN yet. Generate one before you open a ticket with ERM support.
+						No support PIN yet. Generate one before you open a ticket with Fable support.
 					</p>
 
 					<button
@@ -265,7 +265,7 @@
 		</form>
 
 		<Callout tone="warning">
-			Only share this with ERM support. Regenerating replaces the old PIN straight away.
+			Only share this with Fable support. Regenerating replaces the old PIN straight away.
 		</Callout>
 	</Card>
 

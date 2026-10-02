@@ -141,7 +141,7 @@
 		data.affiliates.then((value) => (affiliates = new Set(value)));
 	});
 
-	const official = new Set(['987798554972143728']);
+	const official = $derived(new Set(data.officialGuildIds));
 
 	const roles: Record<number, string> = {
 		3: 'Management',
@@ -203,8 +203,8 @@
 />
 
 <Meta
-	title="Your Servers - ERM Systems"
-	description="Open the ERM dashboard for any Discord server you manage."
+	title="Your Servers - Fable"
+	description="Open the Fable dashboard for any Discord server you manage."
 />
 
 <section class="mx-auto max-w-350 px-6 py-16">
@@ -299,14 +299,14 @@
 	{:else if !list.length}
 		<div class="mt-10 rounded-xl border border-line bg-surface p-10 text-center">
 			<h2 class="text-xl font-semibold">No servers yet</h2>
-			<p class="mt-2 text-muted">You do not have access to any server using ERM.</p>
+			<p class="mt-2 text-muted">You do not have access to any server using Fable.</p>
 			<a
 				href={utm(resolve('/invite'), 'guilds-empty') as ResolvedPathname}
 				data-sveltekit-reload
 				class="mt-6 inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-bg transition-opacity hover:opacity-85 pointer-coarse:py-3"
 			>
 				<Plus class="h-4 w-4" />
-				Invite ERM
+				Invite Fable
 			</a>
 		</div>
 	{:else}
@@ -403,7 +403,7 @@
 								? 'pointer-events-none opacity-50'
 								: ''}"
 						>
-							{#if guild.permissionLevel >= 1}
+							{#if guild.permissionLevel >= 1 && !data.builtinBackend}
 								<a
 									href={panel(guild)}
 									class="flex-1 rounded-lg border border-line bg-white/5 px-3 py-2 text-center text-sm font-semibold transition-colors hover:bg-white/10 pointer-coarse:py-3"

@@ -160,7 +160,7 @@ export function pushAlert(title: string, body: string) {
 	if (!alertsSupported() || (!document.hidden && document.hasFocus())) return;
 
 	try {
-		const notification = new Notification(title, { body, tag: 'erm-panel' });
+		const notification = new Notification(title, { body, tag: 'fable-panel' });
 		notification.onclick = () => {
 			window.focus();
 			notification.close();

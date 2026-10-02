@@ -72,7 +72,7 @@ export const dashboardPages: DashboardPage[] = [
 		icon: Bot,
 		label: 'Whitelabel',
 		group: 'Server',
-		description: 'Run ERM under your own bot branding.',
+		description: 'Run Fable under your own bot branding.',
 		keywords: ['whitelabel', 'branding', 'bot name', 'avatar', 'banner', 'bio', 'appearance']
 	},
 	{

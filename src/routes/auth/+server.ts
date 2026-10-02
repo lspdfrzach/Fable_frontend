@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { builtinBackend } from '$lib/server/config';
 import {
 	clearSessionCookie,
 	getSession,
@@ -16,13 +17,16 @@ function withNotice(path: string, origin: string): string {
 }
 
 export const GET: RequestHandler = async ({ url, cookies }) => {
+	if (builtinBackend) redirect(303, '/login?error=login');
 	const token = url.searchParams.get('token') ?? '';
 	const returnTo = safeReturnTo(cookies.get(returnCookie));
 	cookies.delete(returnCookie, { path: '/' });
 
-	if (!token) redirect(303, '/?error=login');
+	if (!token) redirect(303, '/login?error=login');
 
-	if ((await getSession(token)) === 'invalid') redirect(303, '/?error=login');
+	const session = await getSession(token);
+	if (!session || session === 'invalid' || session === 'terminated')
+		redirect(303, '/login?error=login');
 
 	clearSessionCookie(cookies, url);
 	cookies.set(sessionCookie, token, {

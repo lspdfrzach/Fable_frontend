@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import { TtlCache } from './cache';
 import { revokeSession } from './session';
 
@@ -121,10 +121,10 @@ async function call(
 	payload?: unknown,
 	timeoutMs = timeout
 ): Promise<Reply | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/${guildId}${path}`, {
+		const response = await fetch(`${internalUrl}/${guildId}${path}`, {
 			method,
 			headers: {
 				Authorization: token,
@@ -456,7 +456,7 @@ export async function previewWave(
 
 	const preview = readPreview(reply.body);
 	if (!preview) {
-		return { message: 'ERM sent back a preview we could not read. Try again in a moment.' };
+		return { message: 'Fable sent back a preview we could not read. Try again in a moment.' };
 	}
 
 	return { preview };
@@ -624,7 +624,7 @@ export async function saveShiftSnapshot(
 
 	const code = string(reply.body.code);
 	if (!code) {
-		return { message: 'ERM sent back a snapshot we could not read. Try again in a moment.' };
+		return { message: 'Fable sent back a snapshot we could not read. Try again in a moment.' };
 	}
 
 	return { code };

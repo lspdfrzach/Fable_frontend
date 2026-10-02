@@ -156,10 +156,10 @@
 			</p>
 		{:else if !record.linked}
 			<div class="px-6 py-10 text-center">
-				<p class="text-sm text-muted">Link your Roblox account to ERM to see your logs here.</p>
+				<p class="text-sm text-muted">Link your Roblox account to Fable to see your logs here.</p>
 				<p class="mt-2 text-xs text-muted">
 					Run <span class="rounded bg-white/8 px-1.5 py-0.5 font-mono text-white">/link</span> with the
-					ERM bot in a server or in its DMs, then reload this page.
+					Fable bot in a server or in its DMs, then reload this page.
 				</p>
 			</div>
 		{:else if !entries.length}

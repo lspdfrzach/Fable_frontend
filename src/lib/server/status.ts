@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import { TtlCache } from './cache';
 
 type Endpoints = Record<string, { serviceId: string; health: string }>;
@@ -34,7 +34,6 @@ export interface Status {
 }
 
 const expectedMs = 150;
-const minHealthyShards = 25;
 const ttl = 20_000;
 const key = 'status';
 
@@ -51,7 +50,7 @@ function rollUp(up: number, down: number, total: number): State {
 
 async function get<T>(fetch: typeof globalThis.fetch, path: string): Promise<T | null> {
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}${path}`, {
+		const response = await fetch(`${internalUrl}${path}`, {
 			signal: AbortSignal.timeout(5000)
 		});
 		return response.ok ? ((await response.json()) as T) : null;
@@ -79,7 +78,7 @@ async function fetchStatus(fetch: typeof globalThis.fetch): Promise<Status> {
 		shards = {
 			up: list.length - down,
 			total: list.length,
-			state: down > 0 ? 'down' : healthy >= minHealthyShards ? 'operational' : 'degraded'
+			state: down > 0 ? 'down' : healthy === list.length ? 'operational' : 'degraded'
 		};
 	}
 
@@ -102,7 +101,7 @@ async function fetchStatus(fetch: typeof globalThis.fetch): Promise<Status> {
 }
 
 export function getStatus(fetch: typeof globalThis.fetch): Promise<Status> {
-	if (!env.VITE_INTERNAL_URL) return Promise.resolve(empty);
+	if (!internalUrl) return Promise.resolve(empty);
 
 	const cached = cache.get(key);
 	if (cached) return Promise.resolve(cached);

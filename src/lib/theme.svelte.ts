@@ -23,7 +23,7 @@ export const themes: Theme[] = [
 ];
 
 export const defaultTheme = 'midnight';
-export const themeKey = 'erm:theme';
+export const themeKey = 'fable:theme';
 
 export const theme = $state({ id: defaultTheme });
 

@@ -142,7 +142,7 @@
 	}
 
 	function link() {
-		const url = new URL('https://verify.ermbot.xyz/login');
+		const url = new URL('/verify', window.location.origin);
 		url.searchParams.set('state', data.profile.discordId);
 		url.searchParams.set('panel', 'true');
 		if (data.staging) url.searchParams.set('staging', 'true');
@@ -172,11 +172,11 @@
 	}}
 />
 
-<svelte:head><title>Settings - ERM Systems</title></svelte:head>
+<svelte:head><title>Settings - Fable</title></svelte:head>
 
 <section class="mx-auto max-w-350 px-6 py-16">
 	<h1 class="text-4xl font-bold tracking-[-0.03em]">Settings</h1>
-	<p class="mt-3 text-muted">Your accounts, your activity, and how ERM works for you.</p>
+	<p class="mt-3 text-muted">Your accounts, your activity, and how Fable works for you.</p>
 
 	<div
 		class="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-6 lg:grid-cols-[24rem_minmax(0,1fr)]"
@@ -366,7 +366,7 @@
 					<div class="flex flex-wrap items-center gap-4 border-b border-line px-6 py-5">
 						<div class="flex-1">
 							<h2 class="font-semibold">Automation</h2>
-							<p class="mt-1 text-sm text-muted">How ERM works with you outside the dashboard.</p>
+							<p class="mt-1 text-sm text-muted">How Fable works with you outside the dashboard.</p>
 						</div>
 
 						<button
@@ -551,7 +551,7 @@
 			<div class="rounded-xl border border-line bg-surface">
 				<div class="border-b border-line px-6 py-5">
 					<h2 class="font-semibold">Appearance</h2>
-					<p class="mt-1 text-sm text-muted">How ERM looks on this device.</p>
+					<p class="mt-1 text-sm text-muted">How Fable looks on this device.</p>
 				</div>
 
 				<fieldset class="border-b border-line px-6 py-5">

@@ -35,11 +35,11 @@
 	const avatarShown = $derived(!!avatarSrc && avatarError !== avatarSrc);
 	const bannerShown = $derived(!!bannerSrc && bannerError !== bannerSrc);
 
-	const previewName = $derived(form.value.botName || bot?.username || 'ERM');
+	const previewName = $derived(form.value.botName || bot?.username || 'Fable');
 	const initial = $derived((previewName.trim()[0] ?? 'E').toUpperCase());
 </script>
 
-<PageHeader description="Run ERM under your own bot name, avatar and banner in this server." />
+<PageHeader description="Run Fable under your own bot name, avatar and banner in this server." />
 
 <div class="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
 	<div class="flex flex-col gap-6">
@@ -56,7 +56,7 @@
 						<h2 class="font-semibold">No whitelabel spot assigned</h2>
 						<p class="mt-1 text-sm text-muted">
 							This server does not have a whitelabel spot. Whoever purchased whitelabel can assign a
-							spot to this server from their billing settings. Until then, ERM uses its default
+							spot to this server from their billing settings. Until then, Fable uses its default
 							profile here.
 						</p>
 					</div>
@@ -69,7 +69,7 @@
 						<Input
 							bind:value={form.value.botName}
 							maxlength={whitelabelLimits.botName}
-							placeholder="ERM"
+							placeholder="Fable"
 						/>
 					</Row>
 

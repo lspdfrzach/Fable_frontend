@@ -6,7 +6,7 @@
 </script>
 
 <Meta
-	title="Discontinued - ERM Systems"
+	title="Discontinued - Fable"
 	description="Themes have been discontinued for the time being."
 	noindex
 />
@@ -15,7 +15,7 @@
 	<section class="relative flex flex-1 items-center overflow-hidden">
 		<div
 			class="pointer-events-none absolute -top-50 left-1/2 h-150 w-250 -translate-x-1/2 rounded-full opacity-60 blur-[120px]"
-			style="background: radial-gradient(closest-side, rgba(160,20,20,0.30), transparent)"
+			style="background: radial-gradient(closest-side, rgba(237,24,37,0.30), transparent)"
 		></div>
 
 		<div

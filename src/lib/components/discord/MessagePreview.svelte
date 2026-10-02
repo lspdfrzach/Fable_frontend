@@ -226,14 +226,14 @@
 	{:else}
 		<div class="flex gap-4">
 			<img
-				src="/branding/ERMred.svg"
+				src="/branding/fable-mark.svg"
 				alt=""
 				class="h-10 w-10 shrink-0 rounded-full bg-[#1e1f22] p-1.5"
 			/>
 
 			<div class="min-w-0 flex-1">
 				<div class="flex items-center gap-2">
-					<span class="text-base font-medium text-white">ERM</span>
+					<span class="text-base font-medium text-white">Fable</span>
 					<span
 						class="flex items-center gap-0.5 rounded bg-[#5865f2] px-1 py-px text-[10px] font-semibold text-white"
 					>

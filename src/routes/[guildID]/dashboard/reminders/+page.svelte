@@ -90,7 +90,7 @@
 
 <svelte:window onkeydown={(event) => event.key === 'Escape' && (editing = null)} />
 
-<PageHeader description="Let ERM remind your community, so you don't have to." />
+<PageHeader description="Let Fable remind your community, so you don't have to." />
 
 <div class="mt-8 flex flex-col gap-6">
 	<Card title="Reminders" description="Each one runs on its own interval.">
@@ -218,7 +218,7 @@
 
 			<div class="min-w-0 flex-1">
 				<h2 class="font-semibold">{creating ? 'Add reminder' : 'Edit reminder'}</h2>
-				<p class="mt-1 text-sm text-muted">ERM posts this on a loop until you pause it.</p>
+				<p class="mt-1 text-sm text-muted">Fable posts this on a loop until you pause it.</p>
 			</div>
 
 			<button
@@ -249,7 +249,7 @@
 						bind:value={entry.message}
 						rows={3}
 						maxlength={2000}
-						placeholder="What should ERM post?"
+						placeholder="What should Fable post?"
 					/>
 				</div>
 			</label>

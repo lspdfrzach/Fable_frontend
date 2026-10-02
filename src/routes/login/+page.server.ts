@@ -1,3 +1,6 @@
+import { builtinBackend, loginAvailable, publicBackendUrl } from '$lib/server/config';
+import { getBuiltinBackend } from '$lib/server/builtin';
+import { throttle, throttleMessage } from '$lib/server/ratelimit';
 import { fail, redirect } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { env as publicEnv } from '$env/dynamic/public';
@@ -41,11 +44,21 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 	const returnTo = safeReturnTo(url.searchParams.get('returnTo'));
 	if (await locals.session) redirect(303, returnTo);
 
-	return { returnTo, siteKey: publicEnv.PUBLIC_TURNSTILE_SITE_KEY ?? '' };
+	return {
+		returnTo,
+		available: loginAvailable,
+		siteKey: loginAvailable ? (publicEnv.PUBLIC_TURNSTILE_SITE_KEY ?? '') : ''
+	};
 };
 
 export const actions: Actions = {
 	default: async ({ cookies, getClientAddress, request }) => {
+		const wait = throttle(`login:${getClientAddress()}`);
+		if (wait) return fail(429, { message: throttleMessage(wait) });
+		if (!loginAvailable)
+			return fail(503, {
+				message: 'The Fable dashboard is not available yet. Join our Discord for updates.'
+			});
 		const data = await request.formData();
 		const returnTo = safeReturnTo(data.get('returnTo')?.toString());
 
@@ -59,6 +72,21 @@ export const actions: Actions = {
 			maxAge: 600
 		});
 
-		redirect(303, `${env.BACKEND_PUBLIC_URL || env.VITE_INTERNAL_URL}/Auth/Discord`);
+		if (builtinBackend) {
+			let login: { state: string; url: string };
+			try {
+				login = await getBuiltinBackend().beginLogin();
+			} catch {
+				return fail(503, { message: 'Sign-in is unavailable right now. Try again shortly.' });
+			}
+			cookies.set('fableOAuthState', login.state, {
+				path: '/',
+				httpOnly: true,
+				sameSite: 'lax',
+				maxAge: 600
+			});
+			redirect(303, login.url);
+		}
+		redirect(303, `${publicBackendUrl}/Auth/Discord`);
 	}
 };

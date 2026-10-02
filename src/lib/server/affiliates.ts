@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import type { Affiliate } from '$lib/affiliates';
 import { TtlCache } from './cache';
 
@@ -32,10 +32,10 @@ function webp(url: string): string {
 }
 
 async function fetchAffiliates(): Promise<Affiliate[] | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/Users/Affiliates`, {
+		const response = await fetch(`${internalUrl}/Users/Affiliates`, {
 			signal: AbortSignal.timeout(timeout)
 		});
 		if (!response.ok) {

@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import {
 	defaultAccent,
 	linkLabelLimit,
@@ -74,10 +74,10 @@ interface Reply {
 }
 
 async function call(guildId: string, path: string, token = ''): Promise<Reply | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/${guildId}${path}`, {
+		const response = await fetch(`${internalUrl}/${guildId}${path}`, {
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(timeout)
 		});
@@ -337,10 +337,10 @@ export interface MyRecord {
 }
 
 export async function getMyModerations(token: string, guildId: string): Promise<MyRecord | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/${guildId}/GetMyModerations`, {
+		const response = await fetch(`${internalUrl}/${guildId}/GetMyModerations`, {
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(timeout)
 		});
