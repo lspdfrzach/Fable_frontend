@@ -2,7 +2,7 @@
 	import WifiOff from '@lucide/svelte/icons/wifi-off';
 </script>
 
-<svelte:head><title>Offline - ERM Systems</title></svelte:head>
+<svelte:head><title>Offline - Fable</title></svelte:head>
 
 <main class="flex min-h-svh flex-col items-center justify-center px-6 py-16 text-center">
 	<div
@@ -14,8 +14,8 @@
 
 	<h1 class="mt-6 text-2xl font-semibold">You are offline</h1>
 	<p class="mt-2 max-w-sm text-sm text-muted">
-		ERM needs a connection to show your servers. Everything is still here, it just cannot load until
-		you are back online.
+		Fable needs a connection to show your servers. Everything is still here, it just cannot load
+		until you are back online.
 	</p>
 
 	<button

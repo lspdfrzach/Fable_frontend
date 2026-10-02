@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import { TtlCache } from './cache';
 import { noteUnauthorized } from './session';
 
@@ -72,10 +72,10 @@ export function defaultAvatar(discordId: string): string {
 }
 
 async function fetchProfile(discordId: string): Promise<DiscordProfile | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/Users/GetUserInfo/${discordId}`, {
+		const response = await fetch(`${internalUrl}/Users/GetUserInfo/${discordId}`, {
 			signal: AbortSignal.timeout(timeout)
 		});
 		if (!response.ok) {
@@ -108,11 +108,11 @@ export async function getProfile(discordId: string): Promise<DiscordProfile | nu
 export async function getBotProfile(): Promise<BotProfile | null> {
 	const cached = botProfile.get('bot');
 	if (cached) return cached;
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	return botProfile.dedupe('bot', async () => {
 		try {
-			const response = await fetch(`${env.VITE_INTERNAL_URL}/Discord/BotProfile`, {
+			const response = await fetch(`${internalUrl}/Discord/BotProfile`, {
 				signal: AbortSignal.timeout(timeout)
 			});
 			if (!response.ok) return botProfile.stale('bot') ?? null;
@@ -145,10 +145,10 @@ async function fetchGuildList<T>(
 	path: string,
 	read: (body: Record<string, unknown>) => T[]
 ): Promise<T[] | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/${guildId}${path}`, {
+		const response = await fetch(`${internalUrl}/${guildId}${path}`, {
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(timeout)
 		});

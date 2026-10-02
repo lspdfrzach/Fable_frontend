@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import type { WhitelabelSettings } from '$lib/settings';
 import { revokeSession } from './session';
 
@@ -37,10 +37,10 @@ async function request(
 	method = 'GET',
 	payload?: unknown
 ): Promise<Reply | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}${path}`, {
+		const response = await fetch(`${internalUrl}${path}`, {
 			method,
 			headers: {
 				Authorization: token,

@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import type { ActiveSession, SessionHistoryEntry } from '$lib/sessions';
 import { revokeSession } from './session';
 
@@ -17,10 +17,10 @@ async function call(
 	method = 'GET',
 	payload?: unknown
 ): Promise<Reply | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/${guildId}${path}`, {
+		const response = await fetch(`${internalUrl}/${guildId}${path}`, {
 			method,
 			headers: {
 				Authorization: token,

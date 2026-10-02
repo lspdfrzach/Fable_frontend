@@ -9,26 +9,15 @@
 	import { scale } from 'svelte/transition';
 	import Meta from '$lib/components/Meta.svelte';
 
-	const shots = Object.entries(
-		import.meta.glob('$lib/assets/login/*.webp', {
-			eager: true,
-			query: '?url',
-			import: 'default'
-		}) as Record<string, string>
-	)
-		.sort(([a], [b]) => a.localeCompare(b))
-		.map(([, url]) => url);
-
 	let { data, form } = $props();
 
 	let submitting = $state(false);
 	let solved = $state(false);
 	let failed = $state(false);
-	let current = $state(0);
 	let attempts = $state(0);
 	let widget = $state<HTMLElement>();
 
-	const blocked = $derived(submitting || (Boolean(data.siteKey) && !solved));
+	const blocked = $derived(!data.available || submitting || (Boolean(data.siteKey) && !solved));
 	const status = $derived(solved ? 'solved' : failed ? 'failed' : 'checking');
 	const reduced = new MediaQuery('prefers-reduced-motion: reduce');
 
@@ -39,8 +28,6 @@
 	};
 
 	onMount(() => {
-		const rotate = setInterval(() => (current = (current + 1) % shots.length), 6000);
-
 		if (data.siteKey) {
 			const global = window as TurnstileWindow;
 
@@ -58,8 +45,6 @@
 			script.async = true;
 			document.head.append(script);
 		}
-
-		return () => clearInterval(rotate);
 	});
 
 	$effect(() => {
@@ -91,21 +76,36 @@
 	});
 </script>
 
-<Meta title="Sign in to ERM" description="Sign in with Discord to manage your ERM servers." />
+<Meta title="Sign in to Fable" description="Sign in with Discord to manage your Fable servers." />
 
 <div class="grid min-h-[calc(100vh-3.5rem)] lg:grid-cols-2">
 	<section class="flex flex-col items-center justify-center px-6 py-20">
 		<div class="w-full max-w-90">
 			<img
-				src="/branding/ERMred.svg"
-				alt="ERM"
+				src="/branding/fable-mark.svg"
+				alt="Fable"
 				class="mx-auto h-20 w-auto"
 				width="80"
 				height="80"
 			/>
 
-			<h1 class="mt-10 text-center text-2xl font-semibold tracking-[-0.02em]">Sign in to ERM</h1>
-			<p class="mt-2 text-center text-sm text-muted">Continue with your Discord account.</p>
+			<h1 class="mt-10 text-center text-2xl font-semibold tracking-[-0.02em]">Sign in to Fable</h1>
+			<p class="mt-2 text-center text-sm text-muted">
+				{data.available
+					? 'Continue with your Discord account.'
+					: 'The Fable dashboard is coming soon.'}
+			</p>
+			{#if !data.available}
+				<p
+					class="mt-6 rounded-xl border border-line bg-surface p-4 text-center text-sm leading-relaxed text-muted"
+				>
+					Our website dashboard is not available yet. You can keep using Fable in Discord. <a
+						href="https://discord.gg/fablebot"
+						class="font-semibold text-white underline underline-offset-2"
+						>Join our community for updates.</a
+					>
+				</p>
+			{/if}
 
 			<form method="POST" onsubmit={() => (submitting = true)} class="relative mt-8">
 				<input type="hidden" name="returnTo" value={data.returnTo} />
@@ -189,48 +189,24 @@
 		</div>
 	</section>
 
-	<div class="relative hidden overflow-hidden border-l border-line lg:block">
-		{#each shots as shot, i (shot)}
-			<img
-				src={shot}
-				alt=""
-				aria-hidden="true"
-				loading={i === 0 ? 'eager' : 'lazy'}
-				class="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
-				class:opacity-0={i !== current}
-			/>
-		{/each}
-		<div class="absolute inset-0 bg-linear-to-t from-bg via-bg/75 to-bg/25"></div>
-
-		<div class="relative flex h-full flex-col justify-end p-12">
-			<figure class="max-w-xl">
-				<blockquote class="text-xl leading-relaxed font-light text-balance">
-					&ldquo;Thanks to the help of ERM, we have been able to significantly improve our day to
-					day operations. From game security which allows us to monitor and be alerted of unusual
-					activity in game, to their desktop application which grants staff the ability to quickly
-					run commands and improve our response times greatly.&rdquo;
-				</blockquote>
-				<figcaption class="mt-7">
-					<a
-						href="https://discord.gg/parp"
-						target="_blank"
-						rel="noreferrer"
-						class="group inline-flex items-center gap-3"
-					>
-						<img
-							src="/affiliates/parp.png"
-							alt=""
-							class="h-10 w-10 rounded-full ring-1 ring-white/15 transition-shadow group-hover:ring-white/35"
-							width="40"
-							height="40"
-						/>
-						<div class="text-sm">
-							<p class="font-medium">Pennsylvania State Roleplay</p>
-							<p class="text-muted transition-colors group-hover:text-white">gg/parp</p>
-						</div>
-					</a>
-				</figcaption>
-			</figure>
+	<div
+		class="relative hidden overflow-hidden border-l border-line bg-surface lg:flex lg:items-center lg:justify-center"
+	>
+		<div
+			class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(237,24,37,0.22),transparent_65%)]"
+		></div>
+		<div class="relative max-w-xl p-12">
+			<img src="/branding/fable-mark.svg" alt="" class="h-24 w-24" />
+			<p class="mt-10 text-sm font-semibold tracking-widest text-brand">
+				YOUR COMMUNITY'S NEXT CHAPTER
+			</p>
+			<h2 class="mt-5 text-5xl leading-tight font-bold tracking-tight">
+				A little less admin.<br />A lot more community.
+			</h2>
+			<p class="mt-6 text-lg leading-relaxed text-muted">
+				Staff, shifts, moderation, and sessions. Fable brings your team's tools together so you can
+				focus on the people behind your server.
+			</p>
 		</div>
 	</div>
 </div>

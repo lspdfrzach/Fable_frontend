@@ -1,4 +1,5 @@
-import { redirect, type Handle } from '@sveltejs/kit';
+import { error, redirect, type Handle } from '@sveltejs/kit';
+import { builtinBackend, builtinSections } from '$lib/server/config';
 import { sequence } from '@sveltejs/kit/hooks';
 import { env } from '$env/dynamic/private';
 import {
@@ -13,9 +14,9 @@ import {
 const guardedPaths = ['/guilds', '/settings', '/billing'];
 const guardedGuildRoutes = /^\/\d{17,20}\/(dashboard|panel)(\/|$)/;
 
-const summary = `# ERM Systems
+const summary = `# Fable
 
-ERM gives roleplay communities the tools to manage staff, sessions, moderations, shifts, logs, and server activity from one clean dashboard.
+Fable gives roleplay communities the tools to manage staff, sessions, moderations, shifts, logs, and server activity from one clean dashboard.
 
 ## Pages
 
@@ -26,7 +27,7 @@ ERM gives roleplay communities the tools to manage staff, sessions, moderations,
 
 ## Documentation
 
-https://docs.ermbot.xyz
+/docs
 `;
 
 const analytics =
@@ -44,7 +45,7 @@ const legacyPaths: Record<string, string> = {
 	'/pricing': '/',
 	'/payment': '/billing',
 	'/payment/callback': '/billing',
-	'/staff-docs': 'https://docs.ermbot.xyz'
+	'/staff-docs': '/docs'
 };
 
 function legacyTarget(pathname: string): string {
@@ -63,7 +64,12 @@ const handleHeaders: Handle = async ({ event, resolve }) => {
 	response.headers.set('X-Frame-Options', 'SAMEORIGIN');
 	response.headers.set('X-Content-Type-Options', 'nosniff');
 	response.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-	response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+	response.headers.set(
+		'Referrer-Policy',
+		event.url.pathname === '/auth' || event.url.pathname.startsWith('/api/fable/Auth/')
+			? 'no-referrer'
+			: 'strict-origin-when-cross-origin'
+	);
 
 	const html = response.headers.get('content-type')?.includes('text/html');
 	if (html && !response.headers.has('cache-control')) {
@@ -127,6 +133,20 @@ const handleAuth: Handle = async ({ event, resolve }) => {
 };
 
 const handleGuard: Handle = async ({ event, resolve }) => {
+	if (builtinBackend) {
+		const parts = event.url.pathname.split('/').filter(Boolean);
+		if (
+			/^\d{17,20}$/.test(parts[0] ?? '') &&
+			(parts[1] === 'panel' ||
+				(parts[1] === 'dashboard' &&
+					parts[2] &&
+					(!builtinSections.includes(parts[2]) || parts.length > 3)))
+		)
+			error(
+				501,
+				'This deployment supports basic settings, anti-ping, and shift configuration. Use the Fable bot for other actions.'
+			);
+	}
 	if (!event.locals.token && guarded(event.url.pathname)) {
 		redirect(303, `/login?returnTo=${encodeURIComponent(event.url.pathname)}`);
 	}

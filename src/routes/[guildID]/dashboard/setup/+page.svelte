@@ -117,7 +117,7 @@
 	}
 </script>
 
-<svelte:head><title>Set up ERM - {data.guild.name}</title></svelte:head>
+<svelte:head><title>Set up Fable - {data.guild.name}</title></svelte:head>
 
 {#if done}
 	<div class="mx-auto mt-16 max-w-2xl text-center">
@@ -127,7 +127,9 @@
 			<PartyPopper class="h-6 w-6" aria-hidden="true" />
 		</div>
 
-		<h1 bind:this={doneHeading} tabindex="-1" class="mt-6 text-2xl font-semibold">ERM is ready</h1>
+		<h1 bind:this={doneHeading} tabindex="-1" class="mt-6 text-2xl font-semibold">
+			Fable is ready
+		</h1>
 		<p class="mx-auto mt-2 max-w-lg text-muted">
 			Your staff can start using it right away. Everything you skipped is still here whenever you
 			want it, and nothing you set up now is permanent.
@@ -255,7 +257,7 @@
 			{#key step}
 				<div in:fly={{ y: 10, duration: 200 }}>
 					{#if step === 'welcome'}
-						<Card title="What ERM does" description="A quick tour before you set anything.">
+						<Card title="What Fable does" description="A quick tour before you set anything.">
 							<ul class="divide-y divide-line">
 								{#each tour as entry, index (entry.label)}
 									<li
@@ -473,8 +475,8 @@
 								</Row>
 
 								<Callout>
-									Nothing is saved until you check the key and confirm the server. Without this, ERM
-									still handles shifts and staff.
+									Nothing is saved until you check the key and confirm the server. Without this,
+									Fable still handles shifts and staff.
 								</Callout>
 							{/if}
 						</Card>
@@ -489,11 +491,11 @@
 									/>
 								</Row>
 
-								<Row label="ERM activity" description="Setting changes and other ERM actions.">
+								<Row label="Fable activity" description="Setting changes and other Fable actions.">
 									<ChannelSelect
 										bind:value={setup.logging.ermLog}
 										placeholder="Not logged"
-										label="ERM activity channel"
+										label="Fable activity channel"
 									/>
 								</Row>
 							</div>

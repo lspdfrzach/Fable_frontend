@@ -8,7 +8,7 @@
 	import Scale from '@lucide/svelte/icons/scale';
 	import Sparkles from '@lucide/svelte/icons/sparkles';
 	import Users from '@lucide/svelte/icons/users';
-	import { siDiscord, siGithub, siYoutube } from 'simple-icons';
+	import { siDiscord, siGithub } from 'simple-icons';
 	import type { Component } from 'svelte';
 	import { resolve } from '$app/paths';
 	import type { ResolvedPathname } from '$app/types';
@@ -38,11 +38,11 @@
 			links: [
 				{
 					label: 'Documentation',
-					href: 'https://docs.ermbot.xyz',
+					href: resolve('/docs'),
 					icon: BookOpen,
 					external: true
 				},
-				{ label: 'Invite ERM', href: resolve('/invite'), icon: Plus, reload: true },
+				{ label: 'Invite Fable', href: resolve('/invite'), icon: Plus, reload: true },
 				{ label: 'Terms of Service', href: resolve('/terms'), icon: Scale },
 				{ label: 'Privacy Policy', href: resolve('/privacy'), icon: Lock }
 			]
@@ -52,20 +52,14 @@
 			links: [
 				{
 					label: 'Support Server',
-					href: 'https://discord.gg/FAC629TzBy',
+					href: 'https://discord.gg/fablebot',
 					icon: siDiscord.path,
 					external: true
 				},
 				{
 					label: 'GitHub',
-					href: 'https://github.com/ERM-Systems/ERM',
+					href: 'https://github.com/Fable-Systems/Fable',
 					icon: siGithub.path,
-					external: true
-				},
-				{
-					label: 'YouTube',
-					href: 'https://www.youtube.com/@ermbot',
-					icon: siYoutube.path,
 					external: true
 				},
 				{ label: 'Team', href: resolve('/team'), icon: Users }
@@ -77,14 +71,14 @@
 		operational: 'bg-green-500',
 		degraded: 'bg-yellow-500',
 		down: 'bg-red-500',
-		unknown: 'bg-red-500'
+		unknown: 'bg-white/35'
 	};
 
 	const label: Record<State, string> = {
 		operational: 'All services online',
 		degraded: 'Some services degraded',
 		down: 'Major outages',
-		unknown: 'Major outages'
+		unknown: 'Status unavailable'
 	};
 
 	function overall(status: Status): State {
@@ -102,9 +96,9 @@
 <footer class="border-t border-line">
 	<div class="mx-auto flex max-w-275 flex-col gap-10 px-6 py-12 md:flex-row md:gap-12">
 		<div class="flex flex-col gap-3 md:w-1/3">
-			<a href={resolve('/')} class="tap flex items-center gap-2" aria-label="ERM Systems">
-				<img src="/branding/ERMred.svg" alt="" class="h-6 w-6" />
-				<span class="font-semibold tracking-tight">ERM</span>
+			<a href={resolve('/')} class="tap flex items-center gap-2" aria-label="Fable">
+				<img src="/branding/fable-mark.svg" alt="" class="h-6 w-6" />
+				<span class="font-semibold tracking-tight">Fable</span>
 			</a>
 			<p class="max-w-xs text-sm leading-relaxed text-muted">
 				The all-in-one approach to game moderation logging, shift logging, and more.
@@ -154,7 +148,15 @@
 		<div
 			class="mx-auto flex max-w-275 flex-col-reverse gap-3 px-6 py-5 sm:flex-row sm:items-center sm:justify-between"
 		>
-			<p class="text-sm text-muted">&copy; {year} ERM Systems. All rights reserved.</p>
+			<p class="text-sm text-muted">
+				&copy; {year} Fable. Built on
+				<a href="https://github.com/ERM-Systems/ERM" class="underline underline-offset-2">ERM</a>
+				·
+				<a
+					href="https://github.com/lspdfrzach/Fable_frontend/blob/main/LICENSE"
+					class="underline underline-offset-2">CC BY-NC-SA</a
+				>
+			</p>
 
 			<a
 				href={resolve('/status')}

@@ -1,5 +1,5 @@
+import { internalUrl } from '$lib/server/config';
 import { error, json } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
 import { authorizeGuild } from '$lib/server/dashboard';
 import { throttle, throttleMessage } from '$lib/server/ratelimit';
 import type { RequestHandler } from './$types';
@@ -46,13 +46,13 @@ export const POST: RequestHandler = async (event) => {
 		);
 	}
 
-	if (!env.VITE_INTERNAL_URL) error(502, 'Uploads are unavailable right now, try again shortly.');
+	if (!internalUrl) error(502, 'Uploads are unavailable right now, try again shortly.');
 
 	const body = new FormData();
 	body.append('file', new Blob([await file.arrayBuffer()], { type: file.type }), file.name);
 
 	const started = performance.now();
-	const response = await fetch(`${env.VITE_INTERNAL_URL}/FileProxy/Upload`, {
+	const response = await fetch(`${internalUrl}/FileProxy/Upload`, {
 		method: 'POST',
 		headers: { Authorization: token },
 		body,

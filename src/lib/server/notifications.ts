@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import { revokeSession } from './session';
 import { TtlCache } from './cache';
 
@@ -56,10 +56,10 @@ function normalize(raw: RawNotification): Notification {
 }
 
 async function call(token: string, path: string, method: string): Promise<Response | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}${path}`, {
+		const response = await fetch(`${internalUrl}${path}`, {
 			method,
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(timeout)
@@ -89,7 +89,7 @@ async function fetchNotifications(token: string): Promise<Notification[]> {
 }
 
 export function getNotifications(token: string): Promise<Notification[]> {
-	if (!token || !env.VITE_INTERNAL_URL) return Promise.resolve([]);
+	if (!token || !internalUrl) return Promise.resolve([]);
 
 	const cached = cache.get(token);
 	if (cached) return Promise.resolve(cached);

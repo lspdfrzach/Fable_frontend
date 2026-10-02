@@ -1,10 +1,12 @@
+import { internalUrl } from '$lib/server/config';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { redirect, type Cookies } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { TtlCache } from './cache';
 
-export const sessionCookie = env.ENVIRONMENT === 'staging' ? 'authTokenStaging' : 'authToken';
-export const returnCookie = 'authReturn';
+export const sessionCookie =
+	env.ENVIRONMENT === 'staging' ? 'fableAuthTokenStaging' : 'fableAuthToken';
+export const returnCookie = 'fableAuthReturn';
 export const sessionMaxAge = 30 * 24 * 60 * 60;
 export const afterLogin = '/guilds';
 
@@ -83,11 +85,11 @@ setInterval(persist, flushInterval).unref();
 async function fetchSession(
 	token: string
 ): Promise<CachedSession | 'invalid' | 'terminated' | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	let response: Response;
 	try {
-		response = await fetch(`${env.VITE_INTERNAL_URL}/Users/Session`, {
+		response = await fetch(`${internalUrl}/Users/Session`, {
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(timeout)
 		});
@@ -169,7 +171,14 @@ export async function getSession(
 export function safeReturnTo(path: string | null | undefined): string {
 	if (!path || !path.startsWith('/')) return afterLogin;
 	if (path.startsWith('//') || path.startsWith('/\\')) return afterLogin;
-	return path;
+	try {
+		const target = new URL(path, 'https://fable.invalid');
+		return target.origin === 'https://fable.invalid'
+			? `${target.pathname}${target.search}${target.hash}`
+			: afterLogin;
+	} catch {
+		return afterLogin;
+	}
 }
 
 function loginRedirect(url: URL): never {

@@ -142,8 +142,8 @@
 			</div>
 
 			<Callout>
-				Requests are sent with /staff request in Discord, and the staff counts come from ERM shifts
-				that are currently open, not from your ER:LC server.
+				Requests are sent with /staff request in Discord, and the staff counts come from Fable
+				shifts that are currently open, not from your ER:LC server.
 			</Callout>
 		</Card>
 	</div>

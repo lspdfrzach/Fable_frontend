@@ -1,6 +1,6 @@
+import { internalUrl } from '$lib/server/config';
 import { error } from '@sveltejs/kit';
 import type { Cookies } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
 import { getGuilds } from './guilds';
 import {
 	getLiveServer,
@@ -79,10 +79,10 @@ export async function call(
 	init: RequestInit = {},
 	ms: number = timeout
 ): Promise<Reply | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}${path}`, {
+		const response = await fetch(`${internalUrl}${path}`, {
 			...init,
 			headers: {
 				Authorization: token,

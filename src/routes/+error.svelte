@@ -34,7 +34,7 @@
 	const retryable = $derived(status >= 500 || status === 429);
 </script>
 
-<svelte:head><title>{status} - ERM Systems</title></svelte:head>
+<svelte:head><title>{status} - Fable</title></svelte:head>
 
 <section class="mx-auto flex max-w-150 flex-col items-center px-6 py-28 text-center">
 	<div in:fly={{ y: 12, duration: 320 }}>

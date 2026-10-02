@@ -1,3 +1,4 @@
+import { weatherProxyUrl } from '$lib/server/config';
 import { TtlCache } from './cache';
 
 export interface Place {
@@ -17,7 +18,7 @@ export interface Weather {
 	matches: string[];
 }
 
-const proxy = 'https://proxy.ermbot.xyz/api';
+const proxy = weatherProxyUrl;
 const geocoder = 'https://geocoding-api.open-meteo.com/v1/search';
 const timeout = 8000;
 const count = 8;
@@ -112,7 +113,9 @@ export async function findPlaces(query: string): Promise<Place[]> {
 	return lookups.dedupe(key, async () => {
 		const search = `${encodeURIComponent(name)}&count=${count}`;
 
-		let found = readPlaces(await call(`${proxy}/geocode?location=${search}`), name.toLowerCase());
+		let found = proxy
+			? readPlaces(await call(`${proxy}/geocode?location=${search}`), name.toLowerCase())
+			: [];
 		if (found.length < 2) {
 			const extra = readPlaces(
 				await call(`${geocoder}?name=${search}&language=en&format=json`),
@@ -135,6 +138,7 @@ function score(place: Place, qualifiers: string[]): number {
 }
 
 async function forecast(place: Place, matches: string[]): Promise<Weather | null> {
+	if (!proxy) return null;
 	const url = `${proxy}/weather?lat=${place.latitude}&lon=${place.longitude}&timezone=${encodeURIComponent(place.timezone)}`;
 	const body = await call(url);
 	if (!body) return null;

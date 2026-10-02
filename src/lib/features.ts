@@ -19,10 +19,6 @@ import TrendingUp from '@lucide/svelte/icons/trending-up';
 import TvMinimal from '@lucide/svelte/icons/tv-minimal';
 import Users from '@lucide/svelte/icons/users';
 import Workflow from '@lucide/svelte/icons/workflow';
-import type { Picture } from '@sveltejs/enhanced-img';
-import applications from '$lib/assets/features/applications.png?enhanced';
-import modpanel from '$lib/assets/features/modpanel.png?enhanced';
-import serverSettings from '$lib/assets/features/server-settings.png?enhanced';
 
 export interface Feature {
 	slug: string;
@@ -31,7 +27,7 @@ export interface Feature {
 	summary: string;
 	body: string[];
 	points: string[];
-	image?: Picture;
+	preview?: boolean;
 	icon: typeof ShieldCheck;
 }
 
@@ -53,7 +49,7 @@ export const features: Feature[] = [
 			'BOLOs, priorities and staff requests in the same view',
 			'Start, break and end your shift without leaving the page'
 		],
-		image: modpanel,
+		preview: true,
 		icon: ShieldCheck
 	},
 	{
@@ -101,7 +97,7 @@ export const features: Feature[] = [
 			'Preview the form exactly as applicants see it',
 			'Duplicate an application to reuse its questions'
 		],
-		image: applications,
+		preview: true,
 		icon: ClipboardList
 	},
 	{
@@ -110,7 +106,7 @@ export const features: Feature[] = [
 		group: 'Staff',
 		summary: 'Track staff hours, breaks and quotas without lifting a finger.',
 		body: [
-			'Staff go on duty and ERM does the rest. Shifts assign roles, rename members and count towards quota automatically, so you always know how much your team is really working.',
+			'Staff go on duty and Fable does the rest. Shifts assign roles, rename members and count towards quota automatically, so you always know how much your team is really working.',
 			'Breaks pause the clock instead of ending the shift, and every shift is kept, so a member behind on quota can be shown exactly which weeks they missed.'
 		],
 		points: [
@@ -178,7 +174,7 @@ export const features: Feature[] = [
 		group: 'Game',
 		summary: 'Connect your ER:LC server and act on it from Discord.',
 		body: [
-			'Add your ER:LC server key once and ERM can read and act on the server directly. Commands run remotely from Discord or the panel, and the logs come straight back.',
+			'Add your ER:LC server key once and Fable can read and act on the server directly. Commands run remotely from Discord or the panel, and the logs come straight back.',
 			'Restrictions are enforced without a moderator watching for them. Restricted vehicles move the driver off the team, and RDM is detected and sent to the roles you pick.'
 		],
 		points: [
@@ -210,7 +206,7 @@ export const features: Feature[] = [
 		slug: 'game-automation',
 		title: 'Game Automation',
 		group: 'Game',
-		summary: 'What ERM does inside your server without being asked.',
+		summary: 'What Fable does inside your server without being asked.',
 		body: [
 			'Automation keeps your in-game permissions matched to Discord. Staff roles sync to moderator and administrator in game, so a promotion in Discord is a promotion in the server.',
 			'Players can be checked against your Discord when they join, and live counts feed into voice or text channels your community can see.'
@@ -244,7 +240,7 @@ export const features: Feature[] = [
 		group: 'Game',
 		summary: 'Let players request scenario time, on your terms.',
 		body: [
-			'Players request priority in game and ERM handles the rest. Request types and presets keep scenarios consistent instead of being written from scratch each time.',
+			'Players request priority in game and Fable handles the rest. Request types and presets keep scenarios consistent instead of being written from scratch each time.',
 			'Player and server cooldowns stop the same person asking every five minutes, and peacetime can be called when the server needs to settle.'
 		],
 		points: [
@@ -289,7 +285,7 @@ export const features: Feature[] = [
 		group: 'Server',
 		summary: 'Set up your whole server without learning a command.',
 		body: [
-			'Every setting ERM has lives in one dashboard, grouped by what it affects and searchable the moment you know what you are looking for.',
+			'Every setting Fable has lives in one dashboard, grouped by what it affects and searchable the moment you know what you are looking for.',
 			'Roles decide who reaches what, and permission levels are read top to bottom. Staff manage their own shifts and punishments, administrators moderate other staff and approve leave, and management can change anything, including these settings.',
 			'Nothing is hidden behind a command. Every change is written to the audit log with the name of whoever made it.'
 		],
@@ -299,7 +295,7 @@ export const features: Feature[] = [
 			'Easily manage sessions, priorities and applications',
 			'See who changed what, and when'
 		],
-		image: serverSettings,
+		preview: true,
 		icon: LayoutDashboard
 	},
 	{
@@ -323,10 +319,10 @@ export const features: Feature[] = [
 		slug: 'whitelabel',
 		title: 'Whitelabel',
 		group: 'Server',
-		summary: 'Run ERM under your own bot name, avatar and banner.',
+		summary: 'Run Fable under your own bot name, avatar and banner.',
 		body: [
 			'Whitelabel puts your branding on the bot itself. Members see your name, your avatar and your banner in the member list and on every message it sends.',
-			'Everything underneath is still ERM, so features and updates arrive the same way they always have.'
+			'Everything underneath is still Fable, so features and updates arrive the same way they always have.'
 		],
 		points: ['Your own bot name and avatar', 'Custom banner and bio', 'Applies across your server'],
 		icon: Bot
@@ -351,7 +347,7 @@ export const features: Feature[] = [
 		slug: 'reminders',
 		title: 'Reminders',
 		group: 'Server',
-		summary: 'Let ERM remind your community, so you do not have to.',
+		summary: 'Let Fable remind your community, so you do not have to.',
 		body: [
 			'Recurring messages on their own timers. Rules reminders, session announcements and staff nudges all go out on schedule.',
 			'Each one runs on its own interval, in the channel you pick, mentioning the roles that need to see it.'

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import DashboardPreview from '$lib/components/DashboardPreview.svelte';
 	import ArrowRight from '@lucide/svelte/icons/arrow-right';
 	import Check from '@lucide/svelte/icons/check';
 	import { resolve } from '$app/paths';
@@ -9,18 +10,18 @@
 	import { features } from '$lib/features';
 	import { utm } from '$lib/utm';
 
-	const showcase = features.filter((feature) => feature.image);
+	const showcase = features.filter((feature) => feature.preview);
 </script>
 
 <Meta
-	title="Features - ERM Systems"
-	description="Every system ERM runs for your community, from live moderation to staff quotas. Open any one to see how it works."
+	title="Features - Fable"
+	description="Every system Fable runs for your community, from live moderation to staff quotas. Open any one to see how it works."
 />
 
 <section class="relative overflow-hidden">
 	<div
 		class="pointer-events-none absolute -top-50 left-1/2 h-150 w-250 -translate-x-1/2 rounded-full opacity-60 blur-[120px]"
-		style="background: radial-gradient(closest-side, rgba(160,20,20,0.30), transparent)"
+		style="background: radial-gradient(closest-side, rgba(237,24,37,0.30), transparent)"
 	></div>
 
 	<div class="relative mx-auto max-w-275 px-6 pt-20 pb-16 text-center">
@@ -29,7 +30,7 @@
 			Everything you need to be the best.
 		</h1>
 		<p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-balance text-muted">
-			Every system ERM runs for your community, from live moderation to staff quotas. Open any one
+			Every system Fable runs for your community, from live moderation to staff quotas. Open any one
 			to see how it works.
 		</p>
 
@@ -39,7 +40,7 @@
 				data-sveltekit-reload
 				class="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-white/85"
 			>
-				Invite ERM
+				Invite Fable
 			</a>
 			<a
 				href={resolve('/guilds')}
@@ -62,13 +63,8 @@
 					? 'lg:order-last'
 					: ''}"
 			>
-				{#if feature.image}
-					<enhanced:img
-						src={feature.image}
-						alt="{feature.title} in the ERM dashboard"
-						class="w-full rounded-lg"
-						loading={i === 0 ? 'eager' : 'lazy'}
-					/>
+				{#if feature.preview}
+					<DashboardPreview title={feature.title} />
 				{/if}
 			</div>
 
@@ -114,7 +110,7 @@
 		</h2>
 
 		<p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-balance text-muted">
-			That is three of them. Everything else ERM runs for your community is set up from the same
+			That is three of them. Everything else Fable runs for your community is set up from the same
 			dashboard, and more of it will be shown here soon.
 		</p>
 
@@ -124,7 +120,7 @@
 				data-sveltekit-reload
 				class="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-white/85"
 			>
-				Invite ERM
+				Invite Fable
 			</a>
 			<a
 				href={resolve('/guilds')}

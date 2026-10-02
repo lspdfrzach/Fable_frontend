@@ -1,3 +1,4 @@
+import { internalUrl } from '$lib/server/config';
 import { env } from '$env/dynamic/private';
 import type { PageServerLoad } from './$types';
 
@@ -7,11 +8,11 @@ export interface RobloxUser {
 }
 
 async function lookup(fetcher: typeof fetch, username: string): Promise<RobloxUser | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
 		const response = await fetcher(
-			`${env.VITE_INTERNAL_URL}/Roblox/User/Username/${encodeURIComponent(username)}`,
+			`${internalUrl}/Roblox/User/Username/${encodeURIComponent(username)}`,
 			{ signal: AbortSignal.timeout(10000) }
 		);
 		if (!response.ok) return null;

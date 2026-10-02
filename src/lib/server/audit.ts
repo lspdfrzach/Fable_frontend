@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import { discordFallbackAvatar } from '$lib/panel';
 import { getDiscordProfile } from './panel';
 import { revokeSession } from './session';
@@ -31,10 +31,10 @@ export const auditPerPage = 25;
 const timeout = 10_000;
 
 async function call(token: string, guildId: string, path: string): Promise<Reply | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/${guildId}${path}`, {
+		const response = await fetch(`${internalUrl}/${guildId}${path}`, {
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(timeout)
 		});

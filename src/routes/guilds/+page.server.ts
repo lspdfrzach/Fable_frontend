@@ -1,3 +1,4 @@
+import { officialGuildIds } from '$lib/server/config';
 import { fail } from '@sveltejs/kit';
 import { getAffiliates } from '$lib/server/affiliates';
 import { getGuilds, pinGuild, refreshGuilds, refreshWait } from '$lib/server/guilds';
@@ -13,7 +14,8 @@ export const load: PageServerLoad = ({ locals, url }) => {
 	return {
 		username: locals.session.then((user) => user?.username ?? ''),
 		guilds: getGuilds(token),
-		affiliates: getAffiliates(),
+		affiliates: getAffiliates().then((value) => value ?? []),
+		officialGuildIds,
 		wait: refreshWait(token)
 	};
 };

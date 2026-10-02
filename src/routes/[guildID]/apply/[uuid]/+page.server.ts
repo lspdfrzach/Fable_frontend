@@ -1,3 +1,4 @@
+import { affiliatesOnly } from '$lib/server/config';
 import { error, fail } from '@sveltejs/kit';
 import {
 	checkAnswers,
@@ -235,7 +236,7 @@ async function findGate(
 export const load: PageServerLoad = async ({ cookies, locals, params, url }) => {
 	const guildId = params.guildID;
 	if (!/^\d{17,20}$/.test(guildId)) error(404, 'That server does not exist.');
-	if (!(await isAffiliate(guildId))) error(404, 'That server does not exist.');
+	if (affiliatesOnly && !(await isAffiliate(guildId))) error(404, 'That server does not exist.');
 
 	const user = await requireUser(locals, url);
 	const token = cookies.get(sessionCookie) ?? '';

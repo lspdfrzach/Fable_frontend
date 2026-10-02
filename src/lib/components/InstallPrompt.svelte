@@ -13,7 +13,7 @@
 		userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
 	}
 
-	const dismissedKey = 'erm:install-dismissed';
+	const dismissedKey = 'fable:install-dismissed';
 
 	let deferred = $state<InstallEvent | null>(null);
 	let ios = $state(false);
@@ -79,7 +79,7 @@
 
 {#if offer}
 	<section
-		aria-label="Install ERM"
+		aria-label="Install Fable"
 		transition:fly={{ y: 12, duration: 200 }}
 		class="pwa-inset-bottom fixed right-4 bottom-6 left-4 z-50 mx-auto flex max-w-md items-center gap-3 rounded-xl border border-line bg-surface p-3 shadow-2xl shadow-black/60"
 	>
@@ -91,7 +91,7 @@
 		</span>
 
 		<span class="min-w-0 flex-1">
-			<span class="block text-sm font-medium">Install ERM</span>
+			<span class="block text-sm font-medium">Install Fable</span>
 			<span class="block text-sm text-muted"
 				>Open it like an app, straight from your home screen.</span
 			>
@@ -117,7 +117,7 @@
 {/if}
 
 {#if showing}
-	<Modal title="Add ERM to your home screen" width="max-w-md" onclose={() => (showing = false)}>
+	<Modal title="Add Fable to your home screen" width="max-w-md" onclose={() => (showing = false)}>
 		<div class="flex flex-col gap-4 px-6 py-5">
 			<p class="text-sm text-muted">
 				Safari installs apps from the share menu, so this takes two taps.

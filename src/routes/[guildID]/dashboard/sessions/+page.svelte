@@ -694,7 +694,7 @@
 			</div>
 		</Card>
 
-		<Card title="Automation" description="What ERM does on its own while a session runs.">
+		<Card title="Automation" description="What Fable does on its own while a session runs.">
 			<div class="divide-y divide-line">
 				<Row
 					label="Announce When Full"
@@ -719,7 +719,10 @@
 			</div>
 		</Card>
 
-		<Card title="While a session runs" description="Extra rules ERM applies between start and end.">
+		<Card
+			title="While a session runs"
+			description="Extra rules Fable applies between start and end."
+		>
 			<div class="divide-y divide-line">
 				<Row
 					label="Kick When Closed"

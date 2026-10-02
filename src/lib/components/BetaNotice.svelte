@@ -50,15 +50,11 @@
 	>
 		<h2 id="beta-notice-title" class="text-lg font-semibold">Beta testing</h2>
 		<p class="mt-2 text-sm text-muted">
-			This panel is in beta testing. Please report all bugs to your superiors and use the
+			Help us improve the Fable dashboard. Report bugs in our
 			<a
-				href="https://ermbot.xyz"
-				class="font-semibold text-white underline underline-offset-2 transition-opacity hover:opacity-80"
-			>
-				original site
-			</a>
-			if these bugs are preventing you from completing your duties. We thank you for participating in
-			our testing program.
+				href="https://discord.gg/fablebot"
+				class="font-semibold text-white underline underline-offset-2">support server</a
+			>. You can keep using Fable's Discord commands while an issue is being resolved.
 		</p>
 
 		<button

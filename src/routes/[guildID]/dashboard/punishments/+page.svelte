@@ -133,7 +133,7 @@
 />
 
 <div class="flex flex-col gap-6">
-	<Card title="Punishments" description="How your staff moderate through ERM.">
+	<Card title="Punishments" description="How your staff moderate through Fable.">
 		{#snippet action()}
 			<Switch bind:checked={form.value.enabled} label="Punishments" />
 		{/snippet}

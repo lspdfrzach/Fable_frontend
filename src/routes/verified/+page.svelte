@@ -21,7 +21,7 @@
 		not_allowed: {
 			title: 'Cannot link this account',
 			headline: 'ROBLOX blocked the request',
-			body: 'ROBLOX does not allow OAuth verification for accounts under 13, a restriction they enforce on their end that ERM cannot see or override.',
+			body: 'ROBLOX does not allow OAuth verification for accounts under 13, a restriction they enforce on their end that Fable cannot see or override.',
 			hint: 'If your account should qualify, check the birthdate in your ROBLOX account settings.'
 		},
 		unauthorized: {
@@ -44,12 +44,12 @@
 	const retryUrl = $derived.by(() => {
 		if (!data.state) return '';
 
-		const url = new URL('https://verify.ermbot.xyz/login');
+		const url = new URL('/verify', 'https://fablebot.xyz');
 		url.searchParams.set('state', data.state);
 		if (data.staging) url.searchParams.set('staging', 'true');
 		if (data.affiliates) url.searchParams.set('affiliates', 'true');
 
-		return url.toString();
+		return `${url.pathname}${url.search}`;
 	});
 
 	$effect(() => {
@@ -57,7 +57,7 @@
 	});
 </script>
 
-<svelte:head><title>Verified - ERM Systems</title></svelte:head>
+<svelte:head><title>Verified - Fable</title></svelte:head>
 
 {#if data.panel}
 	<section class="mx-auto max-w-150 px-6 py-28 text-center">
@@ -111,7 +111,7 @@
 				{/if}
 
 				<a
-					href="https://discord.gg/FAC629TzBy"
+					href="https://discord.gg/fablebot"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-4 py-2 text-sm font-semibold transition-colors hover:bg-white/8 pointer-coarse:py-3"
@@ -154,7 +154,7 @@
 			{/await}
 		</h1>
 
-		<p class="mt-3 text-muted">Your ROBLOX account is now linked to ERM.</p>
+		<p class="mt-3 text-muted">Your ROBLOX account is now linked to Fable.</p>
 
 		<div class="mt-10 rounded-2xl border border-line bg-surface p-6 text-left">
 			<h2 class="text-sm tracking-wide text-muted uppercase">What is next</h2>

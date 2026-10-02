@@ -12,7 +12,7 @@
 	import type { ResolvedPathname } from '$app/types';
 	import { reveal } from '$lib/actions/reveal';
 	import { utm } from '$lib/utm';
-	import panelImage from '$lib/assets/landing/panel.png?enhanced';
+	import DashboardPreview from '$lib/components/DashboardPreview.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Meta from '$lib/components/Meta.svelte';
 	import type { PageData } from './$types';
@@ -44,9 +44,9 @@
 	});
 
 	const stats = [
-		{ value: '28,000+', label: 'Servers' },
-		{ value: 'Easy', label: 'Setup' },
-		{ value: '100%', label: 'Free' }
+		{ value: 'Staff', label: 'Keep your team organized' },
+		{ value: 'Shifts', label: 'Make every hour count' },
+		{ value: 'Sessions', label: 'Bring your server together' }
 	];
 
 	const features = [
@@ -88,7 +88,7 @@
 		{
 			title: 'Whitelabel',
 			slug: 'whitelabel',
-			body: 'Customize ERM to match your server branding with our whitelabel feature.',
+			body: 'Customize Fable to match your server branding with our whitelabel feature.',
 			span: 'md:col-span-2',
 			icon: Palette
 		}
@@ -96,29 +96,32 @@
 </script>
 
 <Meta
-	title="ERM Systems - Streamlining ROBLOX Game Management"
-	description="ERM gives roleplay communities the tools to manage staff, sessions, moderation, shifts, logs, and server activity from one clean dashboard."
+	title="Fable - Your community's next chapter"
+	description="Fable gives roleplay communities the tools to manage staff, sessions, moderation, shifts, logs, and server activity from one clean dashboard."
 />
 
 <section class="relative overflow-hidden">
 	<div
 		class="pointer-events-none absolute -top-40 right-0 h-175 w-225 rounded-full opacity-60"
-		style="background: radial-gradient(closest-side, rgba(160,20,20,0.30), rgba(160,20,20,0.10) 55%, transparent)"
+		style="background: radial-gradient(closest-side, rgba(237,24,37,0.30), rgba(237,24,37,0.10) 55%, transparent)"
 	></div>
 
 	<div
 		class="relative mx-auto grid max-w-350 items-center gap-16 px-6 py-20 lg:grid-cols-2 lg:py-24"
 	>
 		<div>
+			<p class="mb-6 text-xs font-semibold tracking-[0.2em] text-brand">
+				FABLE · COMMUNITY MANAGEMENT
+			</p>
 			<h1 class="text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl xl:text-6xl">
-				Control your server.<br />
-				<span class="bg-linear-to-b from-white to-white/55 bg-clip-text text-transparent">
-					Without the chaos.
+				Your community.<br />
+				<span class="bg-linear-to-r from-[#ff6972] to-brand bg-clip-text text-transparent">
+					Its next chapter.
 				</span>
 			</h1>
 
 			<p class="mt-7 max-w-lg text-lg leading-relaxed text-muted">
-				ERM gives roleplay communities the tools to manage staff, sessions, moderations, shifts,
+				Fable gives roleplay communities the tools to manage staff, sessions, moderations, shifts,
 				logs, and server activity from one clean dashboard.
 			</p>
 
@@ -126,9 +129,9 @@
 				<a
 					href={utm(resolve('/invite'), 'hero') as ResolvedPathname}
 					data-sveltekit-reload
-					class="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-white/85"
+					class="rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand/85"
 				>
-					Invite ERM
+					Invite Fable
 				</a>
 				<a
 					href={resolve('/guilds')}
@@ -155,13 +158,7 @@
 				</svg>
 
 				<div class="hero-frame-inner">
-					<enhanced:img
-						src={panelImage}
-						alt="The ERM moderation panel showing live logs, server details, and punishments"
-						sizes="(min-width: 688px) 640px, calc(100vw - 3rem)"
-						class="w-full rounded-lg"
-						fetchpriority="high"
-					/>
+					<DashboardPreview />
 				</div>
 			</div>
 		</div>
@@ -172,11 +169,11 @@
 	<div class="text-center" use:reveal>
 		<p class="text-sm font-semibold">Features</p>
 		<h2 class="mt-2 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
-			Everything you need to be the best.
+			Less busywork. More community.
 		</h2>
 		<p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-balance text-muted">
-			Our expansive suite of products will supercharge your workflow. Don't worry about pesky
-			downtime or missing features. We've got you covered.
+			The tools behind a well-run community, brought together. Explore the dashboard, organize your
+			staff, and keep your next session moving.
 		</p>
 	</div>
 
@@ -225,11 +222,10 @@
 		<div class="text-center" use:reveal>
 			<p class="text-sm font-semibold">Affiliates</p>
 			<h2 class="mt-2 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
-				Trusted by the communities setting the standard.
+				Built around communities like yours.
 			</h2>
 			<p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-balance text-muted">
-				We work directly with the teams running the largest roleplay communities on ROBLOX. Here is
-				who we build alongside.
+				Meet the communities building their next chapter with Fable.
 			</p>
 		</div>
 
@@ -295,7 +291,7 @@
 						{#each current.images as image, i (image)}
 							<img
 								src={image}
-								alt="{current.name} using ERM"
+								alt="{current.name} using Fable"
 								loading="lazy"
 								decoding="async"
 								class="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 {slide ===

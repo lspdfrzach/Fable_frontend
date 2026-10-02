@@ -266,7 +266,7 @@
 </script>
 
 <Meta
-	title="{data.guild.name} | ERM Server Overview"
+	title="{data.guild.name} | Fable Server Overview"
 	{description}
 	image={social}
 	wide={!!social}
@@ -542,7 +542,7 @@
 							</p>
 						{:else if record && !record.linked}
 							<p class="px-6 py-8 text-center text-sm text-muted">
-								Link your Roblox account to ERM to see your record here.
+								Link your Roblox account to Fable to see your record here.
 							</p>
 						{:else if entries.length}
 							<ul class="divide-y divide-line">

@@ -3,15 +3,15 @@
 	import Meta from '$lib/components/Meta.svelte';
 
 	const description =
-		'The terms of service governing your use of the ERM Systems bot, dashboard and website.';
+		'The terms of service governing your use of the Fable bot, dashboard and website.';
 </script>
 
-<Meta title="Terms of Service - ERM Systems" {description} />
+<Meta title="Terms of Service - Fable" {description} />
 
 <section class="relative overflow-hidden">
 	<div
 		class="pointer-events-none absolute -top-50 left-1/2 h-150 w-250 -translate-x-1/2 rounded-full opacity-60 blur-[120px]"
-		style="background: radial-gradient(closest-side, rgba(160,20,20,0.30), transparent)"
+		style="background: radial-gradient(closest-side, rgba(237,24,37,0.30), transparent)"
 	></div>
 
 	<div class="relative mx-auto max-w-225 px-6 pt-20 pb-12">
@@ -32,9 +32,7 @@
 	>
 		<h2>1. Definitions</h2>
 		<ul>
-			<li>
-				"Service" refers to Emergency Response Management's bot, website, and related services
-			</li>
+			<li>"Service" refers to Fable's bot, website, and related services</li>
 			<li>"User" means any individual or entity using the Service</li>
 			<li>"Content" includes text, images, data, or other materials</li>
 			<li>"Terms" refers to these Terms of Service</li>

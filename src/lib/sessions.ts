@@ -109,7 +109,7 @@ const voteVariables: MessageVariable[] = [
 ];
 
 const serverVariables: MessageVariable[] = [
-	{ token: '{erlc.name}', description: 'Your ER:LC server name', example: 'ERM Roleplay' },
+	{ token: '{erlc.name}', description: 'Your ER:LC server name', example: 'Fable Roleplay' },
 	{ token: '{erlc.code}', description: 'Your ER:LC join code', example: 'ermrp' },
 	{
 		token: '{erlc.players}',
@@ -136,7 +136,7 @@ const fullVariables: MessageVariable[] = [
 
 const shutdownVariables: MessageVariable[] = [
 	{ token: '{user}', description: 'Mentions whoever ended the session' },
-	{ token: '{erlc.name}', description: 'Your ER:LC server name', example: 'ERM Roleplay' },
+	{ token: '{erlc.name}', description: 'Your ER:LC server name', example: 'Fable Roleplay' },
 	{ token: '{erlc.code}', description: 'Your ER:LC join code', example: 'ermrp' },
 	{ token: '{erlc.max_players}', description: 'Peak player count this session', example: '31' }
 ];

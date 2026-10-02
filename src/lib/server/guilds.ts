@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl, affiliatesOnly } from '$lib/server/config';
 import { getAffiliates } from './affiliates';
 import { revokeSession } from './session';
 import { TtlCache } from './cache';
@@ -74,12 +74,12 @@ function order(a: Guild, b: Guild): number {
 }
 
 async function fetchGuilds(token: string, force: boolean): Promise<Guild[] | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	const path = `/Users/${force ? 'ForceGuilds' : 'Guilds'}`;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}${path}`, {
+		const response = await fetch(`${internalUrl}${path}`, {
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(force ? forceTimeout : timeout)
 		});
@@ -89,7 +89,7 @@ async function fetchGuilds(token: string, force: boolean): Promise<Guild[] | nul
 			return force && response.status === 404 ? fetchGuilds(token, false) : null;
 		}
 
-		const affiliates = await getAffiliates();
+		const affiliates = affiliatesOnly ? await getAffiliates() : [];
 		if (!affiliates) {
 			console.warn(`${path} skipped, affiliates are unavailable`);
 			return null;
@@ -97,7 +97,9 @@ async function fetchGuilds(token: string, force: boolean): Promise<Guild[] | nul
 
 		const allowed = new Set(affiliates);
 		const body = (await response.json()) as { Guilds?: RawGuild[] };
-		const list = (body.Guilds ?? []).filter((raw) => raw.ID && allowed.has(raw.ID)).map(normalize);
+		const list = (body.Guilds ?? [])
+			.filter((raw) => raw.ID && (!affiliatesOnly || allowed.has(raw.ID)))
+			.map(normalize);
 		list.sort(order);
 
 		guilds.set(token, list);
@@ -121,10 +123,10 @@ export async function getGuilds(token: string, guildId?: string): Promise<Guild[
 }
 
 export async function pinGuild(token: string, guildId: string): Promise<boolean | null> {
-	if (!env.VITE_INTERNAL_URL) return null;
+	if (!internalUrl) return null;
 
 	try {
-		const response = await fetch(`${env.VITE_INTERNAL_URL}/Users/PinGuild/${guildId}`, {
+		const response = await fetch(`${internalUrl}/Users/PinGuild/${guildId}`, {
 			method: 'POST',
 			headers: { Authorization: token },
 			signal: AbortSignal.timeout(timeout)

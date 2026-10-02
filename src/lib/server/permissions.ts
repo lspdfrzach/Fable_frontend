@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { internalUrl } from '$lib/server/config';
 import { TtlCache } from './cache';
 import { revokeSession } from './session';
 
@@ -45,7 +45,7 @@ export function grantsPanel(permissions: ResolvedPermissions, key: string): bool
 }
 
 export async function getPermissions(token: string, guildId: string): Promise<ResolvedPermissions> {
-	if (!env.VITE_INTERNAL_URL || !token) return fallback;
+	if (!internalUrl || !token) return fallback;
 
 	const key = `${token}:${guildId}`;
 	const cached = resolved.get(key);
@@ -53,7 +53,7 @@ export async function getPermissions(token: string, guildId: string): Promise<Re
 
 	return resolved.dedupe(key, async () => {
 		try {
-			const response = await fetch(`${env.VITE_INTERNAL_URL}/${guildId}/permissions/me`, {
+			const response = await fetch(`${internalUrl}/${guildId}/permissions/me`, {
 				headers: { Authorization: token },
 				signal: AbortSignal.timeout(timeout)
 			});

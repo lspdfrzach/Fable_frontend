@@ -25,7 +25,7 @@
 	const links: { label: string; href: ResolvedPathname }[] = [
 		{ label: 'Dashboard', href: resolve('/guilds') },
 		{ label: 'Features', href: resolve('/features') },
-		{ label: 'Whitelabel', href: resolve('/whitelabel') }
+		{ label: 'Get started', href: resolve('/docs') }
 	];
 
 	const current = $derived(page.url.pathname);
@@ -116,14 +116,14 @@
 		operational: 'bg-green-500',
 		degraded: 'bg-yellow-500',
 		down: 'bg-red-500',
-		unknown: 'bg-red-500'
+		unknown: 'bg-white/35'
 	};
 
 	const label: Record<State, string> = {
 		operational: 'All systems operational',
 		degraded: 'Partially degraded',
 		down: 'Outage detected',
-		unknown: 'Major outage'
+		unknown: 'Status unavailable'
 	};
 
 	const statusLabel = $derived(loading ? 'Checking service status' : label[overall]);
@@ -167,8 +167,10 @@
 	<div
 		class="pointer-events-auto mx-auto flex h-14 items-center gap-4 border bg-bg/40 backdrop-blur-xl transition-[max-width,padding,border-color,box-shadow] duration-300 ease-out pointer-coarse:bg-bg pointer-coarse:backdrop-blur-none {shell}"
 	>
-		<a href={resolve('/')} class="tap shrink-0" aria-label="ERM Systems">
-			<img src="/branding/ERMred.svg" alt="ERM" class="h-6 w-6" />
+		<a href={resolve('/')} class="tap flex shrink-0 items-center gap-2.5" aria-label="Fable">
+			<img src="/branding/fable-mark.svg" alt="" class="h-7 w-7" /><span
+				class="text-xl font-bold tracking-tight">Fable</span
+			>
 		</a>
 
 		<span class="hidden h-5 w-px bg-white/12 md:block"></span>
@@ -351,7 +353,7 @@
 		transition:fly={{ x: 320, duration: 250, opacity: 1 }}
 	>
 		<div class="flex h-14 shrink-0 items-center justify-between border-b border-line px-4">
-			<img src="/branding/ERMred.svg" alt="ERM" class="h-6 w-6" />
+			<img src="/branding/fable-mark.svg" alt="Fable" class="h-6 w-6" />
 			<button
 				type="button"
 				onclick={() => (open = false)}

@@ -1,22 +1,15 @@
 import { redirect } from '@sveltejs/kit';
+import { discordClientId, discordPermissions } from '$lib/server/config';
 import type { RequestHandler } from './$types';
 
-const clientId = '978662093408591912';
-const permissions = '8';
-const scope = 'bot applications.commands';
-
 export const GET: RequestHandler = ({ url }) => {
+	if (!discordClientId) redirect(303, '/connect?service=invite');
 	const authorize = new URL('https://discord.com/oauth2/authorize');
-	authorize.searchParams.set('client_id', clientId);
-	authorize.searchParams.set('permissions', permissions);
-	authorize.searchParams.set('scope', scope);
-	authorize.searchParams.set('response_type', 'code');
-	authorize.searchParams.set('redirect_uri', `${url.origin}/invite/callback`);
-
-	const tags = new URLSearchParams(
-		[...url.searchParams].filter(([key]) => key.startsWith('utm_'))
-	).toString();
-	if (tags) authorize.searchParams.set('state', tags);
-
+	authorize.searchParams.set('client_id', discordClientId);
+	authorize.searchParams.set('permissions', discordPermissions);
+	authorize.searchParams.set('scope', 'bot applications.commands');
+	authorize.searchParams.set('integration_type', '0');
+	const guildId = url.searchParams.get('guild_id') ?? '';
+	if (/^\d{17,20}$/.test(guildId)) authorize.searchParams.set('guild_id', guildId);
 	redirect(302, authorize);
 };
